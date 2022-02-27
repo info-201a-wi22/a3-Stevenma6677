@@ -1,0 +1,60 @@
+---
+title: "index"
+author: "Yuxuan Ma"
+date: "2/25/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This project analyzes and calculate the number of female in jails and compared with men in different state. I want to collect this data because women are always in a low class group. However, the ratio of crimal for female is much lower than male
+
+```{r cars}
+summary(cars)
+```
+## Summary
+
+I calculated the sum of female in USA, the sum of female in CA, TN, WA. and the the sum of male admissions in USA, same as in CA,TN,WA. these datas helps me to compare the difference and get evidence.
+## plot 1 the increase of population of male and female in jail as time goes
+
+
+```{r pressure, echo=FALSE}
+year_trend <- ggplot(state_jail_adm_year_summary, aes(x=year)) +
+  geom_line(aes(y = female_jail_adm_state, color = 'female admissions')) +
+  geom_line(aes(y = male_jail_adm_state, color = 'male admissions'))
+year_trend
+```
+This chart explains women as a group has much lower increasing ratio than man
+
+## plot 2 In different area, the comparation between men and women
+
+```{r pressure, echo=FALSE}
+compare <- ggplot(data = admissions_com, aes(x=state, y=data, fill=sex)) +
+  geom_bar(stat="identity")
+compare
+```
+
+This chart explains either in low income state or high income state, female always have a lower ratio of doing crimal activity
+
+
+## plot 3 female sepreations in USA
+
+```{r pressure, echo=FALSE}
+map <- ggplot(state_shape)+
+  geom_polygon(
+    mapping = aes(x=long, y=lat, group=group, fill=num_female_jail),
+    color="white",
+    size = .1
+  )+
+  coord_map()+
+  scale_fill_continuous(low="#EEA236", high="red")+
+  labs(fill = "number of female_jail in 2018")+
+  labs(title="Female admissions by Geography")
+map
+```
+
+This chart shows that only few states have a lot famale admissions. most of states do not have many.
