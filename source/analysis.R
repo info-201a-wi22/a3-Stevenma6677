@@ -1,15 +1,19 @@
-install.packages("dplyr")
+
 library(dplyr)
 
-install.packages("ggplot2")
+
 library(ggplot2)
 
-install.packages("tidyverse")
+
 library(tidyverse)
 
-install.packages("maps")
+
 library(maps)
-incarceration_data <- read.csv("incarceration_trends.csv")
+library(readr)
+
+urlfile = "https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv"
+incarceration_data <- read.csv(url(urlfile))
+
 
 new_data <- incarceration_data %>%
   select( year, state, county_name, total_pop_15to64, female_pop_15to64, total_jail_adm_dcrp, female_jail_adm_dcrp, male_jail_adm_dcrp) %>%
